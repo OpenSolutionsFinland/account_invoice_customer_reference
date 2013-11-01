@@ -141,7 +141,7 @@ class account_invoice(osv.osv):
             myCompany = self.pool.get('res.users').browse(cursor, user, user).company_id
             #logger.notifyChannel('bank_reference',netsvc.LOG_DEBUG,'id: %s, inv_ref_type: %s' % (inv.id, myCompany.inv_ref_type))
             res = ""
-            if myCompany.inv_ref_type in ('FI', 'RF_fi'):
+            if myCompany.country_id.code in ('FI', 'RF_fi', 'fi'):
                 #logger.notifyChannel('bank_reference',netsvc.LOG_DEBUG,'Calculating Finnish Domestic reference')
                 inv_no.reverse()
                 mul = 7
@@ -161,22 +161,22 @@ class account_invoice(osv.osv):
                 resl = [x for x in res]
                 i = 5
 
-            #if myCompany.inv_ref_type == 'RF_fi':
-            #    prefix = "".join([x for x in res if x.isdigit()])
+            if myCompany.country_id.code in ('FI', 'RF_fi', 'fi'):
+                prefix = "".join([x for x in res if x.isdigit()])
                 #logger.notifyChannel('bank_reference',netsvc.LOG_DEBUG,'Using finnish domestic reference as a root for RF number')
 
-            #if myCompany.inv_ref_type in ('RF','RF_fi'):
-            #    cs = 98 - int(prefix) % 97
-            #    if cs < 10:
-            #        res = "RF0%s%s" % (cs,prefix)
-            #    else:
-            #        res = "RF%s%s" % (cs,prefix)
+            if myCompany.country_id.code in ('FI', 'RF_fi', 'fi'):
+                cs = 98 - int(prefix) % 97
+                if cs < 10:
+                    res = "RF0%s%s" % (cs,prefix)
+                else:
+                    res = "RF%s%s" % (cs,prefix)
             
-            cs = 98 - int(prefix) % 97
-            if cs < 10:
-                res = "RF0%s%s" % (cs,prefix)
-            else:
-                res = "RF%s%s" % (cs,prefix)
+            #cs = 98 - int(prefix) % 97
+            #if cs < 10:
+            #    res = "RF0%s%s" % (cs,prefix)
+            #else:
+            #    res = "RF%s%s" % (cs,prefix)
                 
             reslist[inv.id] = res
         
