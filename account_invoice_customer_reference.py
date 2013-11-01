@@ -177,7 +177,7 @@ class account_invoice(osv.osv):
             #    res = "RF0%s%s" % (cs,prefix)
             #else:
             #    res = "RF%s%s" % (cs,prefix)
-            self.write(cursor, user, ids, {'reference':res})
+            self.write(cursor, user, ids, {'finref':res})
             reslist[inv.id] = res
         
         
@@ -185,6 +185,7 @@ class account_invoice(osv.osv):
         return reslist
 
     _columns = {
-        'bank_reference': fields.function(_reference, method=True, type='char', string='Bank reference')
+        'bank_reference': fields.function(_reference, method=True, type='char', string='Bank reference'),
+        'finref': fields.char('Finnish Reference', required=False)
     }
 account_invoice()
