@@ -192,11 +192,11 @@ class account_invoice(osv.osv):
         return reslist
 
     _columns = {
-        'bank_reference': fields.function(_reference, method=True, type='char', string='Bank reference'),
+        'bank_reference': fields.function(_reference, method=True, type='char',store=True, string='Bank reference'),
         'finref': fields.char('Finnish Reference', required=False)
     }
     
-    _defaults = {
-        'finref': lambda self,ids: get_ref_number(self, ids),
-    }
+    #_defaults = {
+    #    'finref': lambda self,ids: get_ref_number(self, ids),
+    #}
 account_invoice()
