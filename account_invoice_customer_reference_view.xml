@@ -9,11 +9,13 @@
       <field name="inherit_id" ref="account.invoice_form"/>
       <field name="arch" type="xml">
         <field name="fiscal_position" position="after">
-	  	  <field name="reference" readonly="1" />
+	  	  <field name="bank_reference" readonly="1" />
         </field>
+<!--
 		<field name="payment_term" position="after">
 			<field name="bank_reference"/>
 		</field>
+-->
       </field>
     </record>
   </data>
