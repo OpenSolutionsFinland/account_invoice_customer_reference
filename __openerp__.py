@@ -5,7 +5,8 @@
 #
 #    Bank reference-RF for customer invoices
 #    Copyright (C) 2010-2011 TTK Ratkaisutalo Oy. All Rights Reserved
-#    $Id$
+#    
+#    Modified by Jesse Vartiainen, Opensolutions Finland 2013
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
