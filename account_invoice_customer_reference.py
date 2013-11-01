@@ -124,7 +124,7 @@ class account_invoice(osv.osv):
             invs = self.browse(cursor, user, ids, context)
         except KeyError, e:
             pass
-            reslist = {}
+        reslist = {}
         for inv in invs:
             if not inv.number:
                 reslist[inv.id]=""
