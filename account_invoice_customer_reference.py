@@ -177,7 +177,7 @@ class account_invoice(osv.osv):
             #    res = "RF0%s%s" % (cs,prefix)
             #else:
             #    res = "RF%s%s" % (cs,prefix)
-            self.write(cr, user, ids, {'reference':res})
+            self.write(cursor, user, ids, {'reference':res})
             reslist[inv.id] = res
         
         
