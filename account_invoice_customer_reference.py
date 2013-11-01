@@ -52,6 +52,13 @@ class account_invoice(osv.osv):
         ctrl_num = self.calculate_control_number(tmp_ref + 'RF00')
         ref_num = ctrl_num + ' ' + tmp_ref
         return ref_num
+    
+    def get_ref_number(self, ids):
+        invoiceNumber = self.pool.get('account.invoice').browse(cr, uid, ids).number
+        if invoiceNumber:
+            return parse_reference_RF(self, invoiceNumber)
+        else:
+            return "lol"
         
     def calculate_control_number(self, ref_string):
         tmp_ref = ''
@@ -187,5 +194,9 @@ class account_invoice(osv.osv):
     _columns = {
         'bank_reference': fields.function(_reference, method=True, type='char', string='Bank reference'),
         'finref': fields.char('Finnish Reference', required=False)
+    }
+    
+    _defaults = {
+        'finref': lambda self,ids: get_ref_number(self, ids),
     }
 account_invoice()
