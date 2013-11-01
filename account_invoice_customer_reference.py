@@ -177,8 +177,9 @@ class account_invoice(osv.osv):
             #    res = "RF0%s%s" % (cs,prefix)
             #else:
             #    res = "RF%s%s" % (cs,prefix)
-                
+            self.write(cr, user, ids, {'reference':res})
             reslist[inv.id] = res
+        
         
         #logger.notifyChannel('bank_reference',netsvc.LOG_DEBUG,'reslist: %s' % reslist)
         return reslist
