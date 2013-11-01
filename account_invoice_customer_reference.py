@@ -120,7 +120,7 @@ class account_invoice(osv.osv):
     
     def _reference(self, cursor, user, ids, name, args, context={}):
         try:
-            logger.notifyChannel('bank_reference',netsvc.LOG_DEBUG,'ids: %s' %ids)
+            #logger.notifyChannel('bank_reference',netsvc.LOG_DEBUG,'ids: %s' %ids)
             invs = self.browse(cursor, user, ids, context)
         except KeyError, e:
             pass
@@ -135,13 +135,14 @@ class account_invoice(osv.osv):
                 if len(companyid) < 2: companyid = "0%s"%companyid
                 inv_no = [x for x in companyid if x.isdigit()] + inv_no
             except Exception, e:
-                logger.notifyChannel('bank_reference',netsvc.LOG_WARNING, 'Cannot add company id to reference number. %s - %s' % (inv.company_id,e))
+                print 'Cannot add company id to reference number.'
+                #logger.notifyChannel('bank_reference',netsvc.LOG_WARNING, 'Cannot add company id to reference number. %s - %s' % (inv.company_id,e))
             prefix = "".join(inv_no)
             myCompany = self.pool.get('res.users').browse(cursor, user, user).company_id
-            logger.notifyChannel('bank_reference',netsvc.LOG_DEBUG,'id: %s, inv_ref_type: %s' % (inv.id, myCompany.inv_ref_type))
+            #logger.notifyChannel('bank_reference',netsvc.LOG_DEBUG,'id: %s, inv_ref_type: %s' % (inv.id, myCompany.inv_ref_type))
             res = ""
             if myCompany.inv_ref_type in ('FI', 'RF_fi'):
-                logger.notifyChannel('bank_reference',netsvc.LOG_DEBUG,'Calculating Finnish Domestic reference')
+                #logger.notifyChannel('bank_reference',netsvc.LOG_DEBUG,'Calculating Finnish Domestic reference')
                 inv_no.reverse()
                 mul = 7
                 cs = 0
@@ -156,13 +157,13 @@ class account_invoice(osv.osv):
                 cs = chk-cs
                 if cs == 10: cs = 0
                 res = str(prefix)+str(cs)
-                logger.notifyChannel('bank_reference',netsvc.LOG_DEBUG,'Calculated reference nubmer: %s'%res)
+                #logger.notifyChannel('bank_reference',netsvc.LOG_DEBUG,'Calculated reference nubmer: %s'%res)
                 resl = [x for x in res]
                 i = 5
 
             if myCompany.inv_ref_type == 'RF_fi':
                 prefix = "".join([x for x in res if x.isdigit()])
-                logger.notifyChannel('bank_reference',netsvc.LOG_DEBUG,'Using finnish domestic reference as a root for RF number')
+                #logger.notifyChannel('bank_reference',netsvc.LOG_DEBUG,'Using finnish domestic reference as a root for RF number')
 
             if myCompany.inv_ref_type in ('RF','RF_fi'):
                 cs = 98 - int(prefix) % 97
@@ -173,7 +174,7 @@ class account_invoice(osv.osv):
             
             reslist[inv.id] = res
         
-        logger.notifyChannel('bank_reference',netsvc.LOG_DEBUG,'reslist: %s' % reslist)
+        #logger.notifyChannel('bank_reference',netsvc.LOG_DEBUG,'reslist: %s' % reslist)
         return reslist
 
     _columns = {
