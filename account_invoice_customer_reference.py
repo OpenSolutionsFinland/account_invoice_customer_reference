@@ -161,17 +161,23 @@ class account_invoice(osv.osv):
                 resl = [x for x in res]
                 i = 5
 
-            if myCompany.inv_ref_type == 'RF_fi':
-                prefix = "".join([x for x in res if x.isdigit()])
+            #if myCompany.inv_ref_type == 'RF_fi':
+            #    prefix = "".join([x for x in res if x.isdigit()])
                 #logger.notifyChannel('bank_reference',netsvc.LOG_DEBUG,'Using finnish domestic reference as a root for RF number')
 
-            if myCompany.inv_ref_type in ('RF','RF_fi'):
-                cs = 98 - int(prefix) % 97
-                if cs < 10:
-                    res = "RF0%s%s" % (cs,prefix)
-                else:
-                    res = "RF%s%s" % (cs,prefix)
+            #if myCompany.inv_ref_type in ('RF','RF_fi'):
+            #    cs = 98 - int(prefix) % 97
+            #    if cs < 10:
+            #        res = "RF0%s%s" % (cs,prefix)
+            #    else:
+            #        res = "RF%s%s" % (cs,prefix)
             
+            cs = 98 - int(prefix) % 97
+            if cs < 10:
+                res = "RF0%s%s" % (cs,prefix)
+            else:
+                res = "RF%s%s" % (cs,prefix)
+                
             reslist[inv.id] = res
         
         #logger.notifyChannel('bank_reference',netsvc.LOG_DEBUG,'reslist: %s' % reslist)
