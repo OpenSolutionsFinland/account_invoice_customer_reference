@@ -164,20 +164,20 @@ class account_invoice(osv.osv):
                 cs = chk-cs
                 if cs == 10: cs = 0
                 res = str(prefix)+str(cs)
-                #logger.notifyChannel('bank_reference',netsvc.LOG_DEBUG,'Calculated reference nubmer: %s'%res)
+                print 'Calculated reference nubmer: %s'%res
                 resl = [x for x in res]
                 i = 5
 
-            if myCompany.country_id.code in ('FI', 'RF_fi', 'fi'):
-                prefix = "".join([x for x in res if x.isdigit()])
+            #if myCompany.country_id.code in ('FI', 'RF_fi', 'fi'):
+            #    prefix = "".join([x for x in res if x.isdigit()])
                 #logger.notifyChannel('bank_reference',netsvc.LOG_DEBUG,'Using finnish domestic reference as a root for RF number')
 
-            if myCompany.country_id.code in ('FI', 'RF_fi', 'fi'):
-                cs = 98 - int(prefix) % 97
-                if cs < 10:
-                    res = "RF0%s%s" % (cs,prefix)
-                else:
-                    res = "RF%s%s" % (cs,prefix)
+            #if myCompany.country_id.code in ('FI', 'RF_fi', 'fi'):
+            #    cs = 98 - int(prefix) % 97
+            #    if cs < 10:
+            #        res = "RF0%s%s" % (cs,prefix)
+            #    else:
+            #        res = "RF%s%s" % (cs,prefix)
             
             #cs = 98 - int(prefix) % 97
             #if cs < 10:
