@@ -143,7 +143,7 @@ class account_invoice(osv.osv):
             
             print 'adding ' + str(zerosNeeded) + ' zeros'
             inv_no = [x for x in ("0" * zerosNeeded)] + inv_no
-
+            print 'number with zeros ' + str(inv_no)
             '''
             try:
                 companyid = str(inv.company_id.id)
