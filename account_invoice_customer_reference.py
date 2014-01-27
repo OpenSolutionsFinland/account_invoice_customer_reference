@@ -154,8 +154,9 @@ class account_invoice(osv.osv):
             '''
                 #logger.notifyChannel('bank_reference',netsvc.LOG_WARNING, 'Cannot add company id to reference number. %s - %s' % (inv.company_id,e))
             maventaSettings = self.pool.get('account.maventa_settings').browse(cursor, user, 1, context=context)
+            
             inv_no = [x for x in maventaSettings.factoring_contract_number if x.isdigit()] + inv_no
-
+            prefix = "".join(inv_no)
             myCompany = self.pool.get('res.users').browse(cursor, user, user).company_id
             #logger.notifyChannel('bank_reference',netsvc.LOG_DEBUG,'id: %s, inv_ref_type: %s' % (inv.id, myCompany.inv_ref_type))
             res = ""
