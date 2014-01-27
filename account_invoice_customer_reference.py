@@ -164,8 +164,11 @@ class account_invoice(osv.osv):
                 inv_no.reverse()
                 mul = 7
                 cs = 0
+                print 'invoice number length ' + str(len(str(inv_no)))
                 for x in inv_no:
-                    cs += mul*int(x)
+                    product = mul*int(x)
+                    print 'adding ' + str(product)
+                    cs += product
                     if mul==7: mul=3
                     elif mul==3: mul=1
                     elif mul==1: mul=7
