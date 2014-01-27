@@ -139,7 +139,7 @@ class account_invoice(osv.osv):
             inv_no = [x for x in inv.number if x.isdigit()]
             zerosNeeded = 11 - len(inv_no)
             print 'adding ' + str(zerosNeeded)
-            inv_no = ("0" * zerosNeeded) + inv_no
+            inv_no = ("0" * zerosNeeded).join(inv_no)
             print 'with zeros: ' + inv_no + ' len' + str(len(inv_no))
             '''
             try:
