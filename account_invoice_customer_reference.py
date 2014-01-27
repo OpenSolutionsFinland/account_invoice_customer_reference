@@ -137,6 +137,10 @@ class account_invoice(osv.osv):
                 reslist[inv.id]=""
                 continue
             inv_no = [x for x in inv.number if x.isdigit()]
+            zerosNeeded = 11 - len(inv_no)
+            print 'adding ' + str(zerosNeeded)
+            inv_no = ("0" * zerosNeeded) + inv_no
+            print 'with zeros: ' + inv_no + ' len' + str(len(inv_no))
             '''
             try:
                 companyid = str(inv.company_id.id)
