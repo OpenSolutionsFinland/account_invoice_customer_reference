@@ -137,15 +137,18 @@ class account_invoice(osv.osv):
                 reslist[inv.id]=""
                 continue
             inv_no = [x for x in inv.number if x.isdigit()]
+            '''
             try:
                 companyid = str(inv.company_id.id)
                 if len(companyid) < 2: companyid = "0%s"%companyid
                 inv_no = [x for x in companyid if x.isdigit()] + inv_no
             except Exception, e:
                 print 'Cannot add company id to reference number.'
+            '''
                 #logger.notifyChannel('bank_reference',netsvc.LOG_WARNING, 'Cannot add company id to reference number. %s - %s' % (inv.company_id,e))
             maventaSettings = self.pool.get('account.maventa_settings').browse(cursor, user, 1, context=context)
             prefix = maventaSettings.factoring_contract_number + "".join(inv_no)
+            print 'using ' + prefix + ' for calculating reference'
             myCompany = self.pool.get('res.users').browse(cursor, user, user).company_id
             #logger.notifyChannel('bank_reference',netsvc.LOG_DEBUG,'id: %s, inv_ref_type: %s' % (inv.id, myCompany.inv_ref_type))
             res = ""
@@ -165,7 +168,7 @@ class account_invoice(osv.osv):
                 cs = chk-cs
                 if cs == 10: cs = 0
                 res = str(prefix)+str(cs)
-                print 'Calculated reference nubmer: %s'%res
+                print 'Calculated reference number: %s'%res
                 resl = [x for x in res]
                 i = 5
 
