@@ -169,9 +169,9 @@ class account_invoice(osv.osv):
                     if mul==7: mul=3
                     elif mul==3: mul=1
                     elif mul==1: mul=7
-                print 'sum before ' + cs
+                print 'sum before ' + str(cs)
                 chk = int(round(cs,-1))
-                print 'sum ' + chk
+                print 'sum ' + str(chk)
                 if chk < cs:
                     chk += 10
                 cs = chk-cs
