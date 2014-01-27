@@ -169,11 +169,14 @@ class account_invoice(osv.osv):
                     if mul==7: mul=3
                     elif mul==3: mul=1
                     elif mul==1: mul=7
+                print 'sum before ' + cs
                 chk = int(round(cs,-1))
+                print 'sum ' + chk
                 if chk < cs:
                     chk += 10
                 cs = chk-cs
                 if cs == 10: cs = 0
+                print 'invoice reference check sum ' + str(cs)
                 res = str(prefix)+str(cs)
                 print 'Calculated reference number: %s'%res
                 resl = [x for x in res]
